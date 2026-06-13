@@ -33,13 +33,33 @@ donde el catastro minero permite ubicar la concesión. La tesis es cruzar la **d
 - **Imagen óptica (Sentinel-2)** — para datar la **expansión de las piletas** en el tiempo y compararla con
   el avance del bowl de subsidencia.
 
+## Producción anual de litio (preliminar)
+
+![Producción anual de carbonato de litio en Fénix](assets/produccion_litio.png){ loading=lazy }
+
+*Producción de carbonato de litio (kt LCE) por año en Fénix. Generado con `produccion_litio.py` a partir de
+`produccion_litio.csv`.*
+
+!!! danger "Cifras preliminares — verificar"
+    Estos valores (≈17 kt en 2019; 15,4 / 16,7 / 17,5 kt en 2021–2023; ≈22 kt en 2024; 2020 sin dato
+    confirmado) provienen de **resúmenes públicos de reportes** de la matriz (Livent / Arcadium) y **no están
+    verificados** contra los filings primarios (SEC 10-K / 8-K). Por eso las barras van **rayadas**. Tras la
+    compra por Rio Tinto (2025) se discontinuó el reporte por sitio. Antes de cualquier conclusión hay que
+    reemplazarlos por las cifras oficiales en `produccion_litio.csv` (columna `verificado`).
+
+La idea del cruce: superponer esta curva con la **subsidencia acumulada** del bowl (cuando exista la serie
+InSAR) para ver si el ritmo de hundimiento acompaña al de extracción — análogo al cruce producción↔subsidencia
+de Vaca Muerta.
+
 ## Estado del análisis
 
 !!! warning "Pendiente de la primera corrida"
     Falta correr la cadena InSAR sobre el AOI (ver [Método](metodo.md)) y completar:
 
-    - [ ] Elegir el track Sentinel-1 con `01_search.py` y fijarlo en `aoi.py`.
-    - [ ] Verificar el bounding box y el punto de referencia Fénix contra la imagen satelital.
-    - [ ] Generar el mapa de velocidad y el slider ([Resultados](resultados.md)).
-    - [ ] Digitalizar las piletas de evaporación → `pipeline/overlay.geojson`.
-    - [ ] Armar la serie anual de producción de litio y cruzarla con la subsidencia.
+    - [x] Elegir el track Sentinel-1 con `01_search.py` y fijarlo en `aoi.py` (**track 83 descendente**).
+    - [x] Punto de referencia Fénix fijado al centroide del polígono OSM "Proyecto Fenix" (`overlay_osm.py`).
+    - [x] Overlay de piletas / industria desde OpenStreetMap → `pipeline/overlay.geojson` (151 polígonos).
+    - [x] Serie anual de producción de litio (preliminar) → `produccion_litio.csv` + gráfico.
+    - [ ] Refinar el bounding box contra la imagen satelital (verificación fina).
+    - [ ] Generar el mapa de velocidad y el slider ([Resultados](resultados.md)) — requiere los productos InSAR.
+    - [ ] Verificar las cifras de producción contra los filings primarios.

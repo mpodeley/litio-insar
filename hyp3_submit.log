@@ -1,0 +1,7 @@
+Muestreo mensual: 433 → 90 escenas (1/mes)
+Track 83 / frame None: 90 fechas (2019-01-06 → 2026-06-04)
+Red SBAS (neighbors=2): 177 pares NUEVOS a encolar
+Costo estimado: ~1770 créditos (de 8.000/mes gratis)
+
+Encolados 177 jobs (name='hombre-muerto-sbas'). Esperando (puede tardar horas)…
+  0%|          | 0/177 [timeout in 21600 s]  0%|          | 0/177 [timeout in 21600s]   0%|          | 0/177 [timeout in 21540s]  0%|          | 0/177 [timeout in 21480s]  0%|          | 0/177 [timeout in 21420s]  0%|          | 0/177 [timeout in 21360s]

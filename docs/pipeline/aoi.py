@@ -19,8 +19,8 @@ SOUTH = -25.65
 EAST = -66.55
 NORTH = -25.05
 
-# --- Referencia (lat, lon): operación Fénix / piletas (aprox.) ---
-FENIX = (-25.42, -66.95)
+# --- Referencia (lat, lon): centroide del polígono "Proyecto Fenix" de OSM (overlay_osm.py) ---
+FENIX = (-25.49, -67.10)
 
 # --- Ventana temporal: serie larga hasta el presente ---
 START = "2019-01-01"

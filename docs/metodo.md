@@ -69,8 +69,10 @@ bien: la señal de compactación está en el **terreno alrededor** de los pozos.
   temporal Gaussiano para atenuar el ruido atmosférico residual.
 - `point_timeseries.py` → series temporales por zona (subsidencia vs referencia estable) para la
   [interpretación](interpretacion.md).
-- Overlay opcional: colocar un `pipeline/overlay.geojson` con las **piletas de evaporación** o la concesión
-  para que aparezca sobre los mapas.
+- `overlay_osm.py` → arma `pipeline/overlay.geojson` con las **piletas / cuerpos de agua / industria** desde
+  OpenStreetMap (Overpass) para dibujarlas sobre los mapas. Punto de partida; revisar contra Sentinel-2.
+- `produccion_litio.py` → grafica la **producción anual de litio** (`produccion_litio.csv`) para el cruce
+  producción ↔ subsidencia.
 
 !!! warning "Nota técnica (reproducibilidad)"
     Con MintPy 1.6.2 + numpy 2.x hay un bug en la inversión pixel-a-pixel
