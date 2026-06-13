@@ -1,0 +1,53 @@
+site_name: Subsidencia en salares de litio con InSAR
+site_description: >-
+  Experimento: ¿se puede observar la subsidencia por extracción de salmuera de
+  litio (Salar del Hombre Muerto, y un salar opaco en China) con Sentinel-1?
+site_url: https://mpodeley.github.io/litio-insar/
+repo_url: https://github.com/mpodeley/litio-insar
+repo_name: mpodeley/litio-insar
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: es
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Modo oscuro
+    - scheme: slate
+      primary: blue grey
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+
+nav:
+  - Inicio: index.md
+  - Método paso a paso: metodo.md
+  - Resultados: resultados.md
+  - Interpretación: interpretacion.md
+  - Salar del Hombre Muerto: salar-publico.md
+  - Caso opaco (China): salar-opaco.md
+  - Próximos pasos: proximos-pasos.md
+  - Referencias: referencias.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - attr_list
+  - md_in_html
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mpodeley/litio-insar
