@@ -25,5 +25,5 @@
 
 El volumen de material removido en una **mina a cielo abierto** **no** se mide bien con InSAR (la mina activa
 decorrelaciona la fase y los cambios son de decenas de metros). Ese caso se aborda en un **repo aparte**
-(`mineria-insar`) con **diferencia de modelos de elevación (DEM)** entre fechas → m³ excavados, reutilizando
+(`mineria-dem`) con **diferencia de modelos de elevación (DEM)** entre fechas → m³ excavados, reutilizando
 la estructura de sitio y la narrativa de este proyecto pero **no** la cadena HyP3/MintPy.
