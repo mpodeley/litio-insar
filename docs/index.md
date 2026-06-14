@@ -27,19 +27,22 @@ oficial no transparenta los caudales.
 Corrimos la cadena completa sobre Hombre Muerto y el resultado es **honesto e instructivo**: con
 **Sentinel-1 gratuito (banda C)** el **piso del salar decorrelaciona** (salmuera + halita húmeda + piletas
 activas), así que solo el **~16 %** del AOI —las lomas al SO, no los pozos— tiene datos confiables, y ahí el
-terreno está **estable**. No aparece la cubeta de subsidencia. **No es un fracaso**: es el **límite físico**
-del método para salares húmedos, y contrasta con el éxito del piloto en la estepa seca de Vaca Muerta
-(~74 % de cobertura). Capturar el bowl probablemente exija **banda X** (TerraSAR-X/PAZ, como en Atacama) o
-**PSI**. Detalle en [Resultados](resultados.md).
+terreno está **estable**. No aparece la cubeta de subsidencia. **No es un fracaso ni un límite de la banda C**
+(en Atacama, Sentinel-1 sí midió ~4 cm sobre el núcleo de halita estable): es que **acá** la coherencia no
+cayó donde está la señal. Contrasta con el éxito del piloto en la estepa seca de Vaca Muerta (~74 % de
+cobertura). Para capturarlo, las palancas son **banda L** (SAOCOM —argentino— o ALOS-2) o mejor procesamiento,
+no necesariamente banda X. Detalle en [Resultados](resultados.md).
 
 ## Qué se esperaba (y qué falló)
 
 - **La hipótesis**: zona árida de halita → alta coherencia, y señal de cm/año por bombeo (como
   [Atacama](referencias.md)).
-- **Lo que pasó**: la halita **húmeda** y las piletas activas cambian entre pasadas → la banda C pierde la
-  fase. La aridez no alcanza si la superficie es agua salada cambiante.
+- **Lo que pasó**: sobre las partes húmedas/cambiantes (salmuera, piletas activas) la banda C pierde la fase;
+  los píxeles coherentes quedaron en los márgenes, no en el wellfield. La aridez no alcanza si esa parte de la
+  superficie es agua salada cambiante.
 - **Lo que sí quedó útil**: las **piletas de evaporación** (overlay OSM) y la **producción de litio**
-  declarada, listas para cruzar con cualquier deformación que un sensor de banda X sí pueda medir.
+  declarada, listas para cruzar con la deformación cuando se la capture (con banda L tipo SAOCOM/ALOS-2, o
+  mejor procesamiento del núcleo de halita).
 
 ## Qué vas a encontrar acá
 

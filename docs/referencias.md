@@ -3,9 +3,12 @@
 ## Subsidencia por extracción de salmuera de litio (caso análogo clave)
 
 - **[Atacama / brine InSAR]** *Land Subsidence and Lithium Brine Pumping: Deformation Analysis Using InSAR
-  Time Series in the Salar de Atacama Basin, Chile* — AGU Fall Meeting 2023. Detecta ~1 cm/año de subsidencia
-  (~8 km) junto a los pozos de salmuera (2019–2022), asociada a una caída de ~10 m del nivel freático; usa
-  PAZ (StripMap) y Sentinel-1 (TOPS). [agu.confex.com](https://agu.confex.com/agu/fm23/meetingapp.cgi/Paper/1373511)
+  Time Series in the Salar de Atacama Basin, Chile* (Delgado et al.) — AGU Fall Meeting 2023. Subsidencia junto
+  a los pozos de salmuera, asociada a una caída de ~10 m del nivel freático. **Multi-sensor**: Sentinel-1
+  (banda C, ~4 cm LOS), ALOS-2 y SAOCOM (banda L, ~2,5 cm) y PAZ (banda X, ~1,5 cm) — es decir, **la banda C
+  detectó la señal** sobre el núcleo de halita estable.
+  [agu.confex.com](https://agu.confex.com/agu/fm23/meetingapp.cgi/Paper/1373511) ·
+  [Delgado, research](https://fdelgadodelapuente.github.io/research/h2o/)
 - **[PAZ / ESA]** *PAZ reveals how lithium extraction causes sinking land* — ESA Earth Online (resumen
   divulgativo del caso Atacama). [earth.esa.int](https://earth.esa.int/eogateway/success-story/paz-reveals-how-lithium-extraction-causes-sinking-land)
 

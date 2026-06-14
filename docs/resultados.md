@@ -6,11 +6,12 @@ período **2019–2026**.
 
 !!! danger "Resultado principal: el salar decorrelaciona — el InSAR gratis no ve el piso del salar"
     Corrimos la cadena completa (track 83 descendente, **136 interferogramas**, 88 fechas, corrección ERA5).
-    El hallazgo no es una cubeta de subsidencia, sino una **limitación física**: en banda C, la superficie
-    **húmeda del salar (salmuera + costra de halita que cambia)** pierde coherencia, así que solo el **16 %**
+    El hallazgo no es una cubeta de subsidencia, sino una **limitación de coherencia**: la superficie
+    **húmeda/cambiante del salar (salmuera + piletas activas)** pierde coherencia, así que solo el **16 %**
     del AOI tiene datos confiables, **concentrados en las lomas/aluvión al SO** — no sobre las piletas ni los
-    pozos. Donde hay datos, el terreno está **esencialmente estable**. Es un resultado honesto e informativo:
-    marca el **límite del método** para este tipo de salar (ver abajo y [Método](metodo.md)).
+    pozos. Donde hay datos, el terreno está **esencialmente estable**. **No es un límite físico de la banda C**
+    (en Atacama, Sentinel-1 sí midió la subsidencia sobre el núcleo de halita estable): es dónde **esta corrida
+    gratuita** se queda corta, y por qué (ver abajo y [Método](metodo.md)).
 
 ## Velocidad media de deformación (2019–2026)
 
@@ -44,16 +45,21 @@ una superficie cambiante (salmuera, costra, piletas activas) que **rompe la cohe
 ## Por qué pasa esto (y qué haría falta)
 
 - **Sentinel-1 es banda C (λ≈5,6 cm)**: muy sensible a cambios de la superficie. Sobre la **halita húmeda y
-  las piletas** la fase se decorrelaciona entre pasadas → esos píxeles quedan enmascarados.
-- El precedente de **Atacama** que detectó ~1 cm/año usó en buena parte **PAZ/TerraSAR-X (banda X, alta
-  resolución)** sobre el núcleo de halita, además de Sentinel-1. Para Hombre Muerto, capturar la deformación
-  del piso del salar probablemente requiera **banda X** o técnicas de **dispersores persistentes (PSI)** sobre
-  estructuras estables, no el SBAS C-band gratuito.
+  las piletas activas** la fase se decorrelaciona entre pasadas → esos píxeles quedan enmascarados.
+- **Importante (corrección honesta)**: en **Atacama**, la banda C **sí funcionó** — Sentinel-1 detectó ~4 cm
+  de subsidencia LOS sobre el **núcleo de halita seca y estable** (Delgado et al.; el estudio sumó además
+  **ALOS-2 y SAOCOM en banda L** y **PAZ en banda X**). O sea, la banda C **no es** el problema de fondo.
+- Entonces nuestro resultado nulo es **específico de esta corrida/salar**: acá los píxeles coherentes cayeron
+  en los **márgenes**, no en el núcleo. Las palancas reales para mejorarlo: **banda L** (SAOCOM —argentino,
+  cubre el salar— o ALOS-2), que mantiene coherencia sobre superficies cambiantes mucho mejor que la C;
+  procesar enfocando el **núcleo de halita** con otro track / umbrales; y **PSI** sobre estructuras estables.
 - También ayudaría sumar el **track ascendente** (más geometría) y acotar el AOI al wellfield.
 
 ## La lección metodológica
 
 Dos, en realidad: (1) **la atmósfera importa** —la serie larga + corrección **ERA5** evita "ver" subsidencia
-donde solo hay retardo atmosférico—; y (2) **el terreno define la viabilidad**: el mismo pipeline que funciona
-de diez en la estepa de Vaca Muerta **choca con la física** sobre un salar húmedo. Reportar esto es parte del
-experimento.
+donde solo hay retardo atmosférico—; y (2) **el sensor y la superficie importan tanto como el pipeline**: el
+mismo flujo que funciona de diez en la estepa seca de Vaca Muerta **se queda corto** sobre las partes
+húmedas/cambiantes de este salar. No porque la banda C no sirva (en Atacama sí midió), sino porque acá la
+coherencia no cayó donde está la señal — algo mejorable con **banda L** o mejor procesamiento. Reportar el
+resultado nulo y por qué es parte del experimento.

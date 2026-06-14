@@ -1,12 +1,17 @@
 # Próximos pasos
 
-## Fase 1 — Hombre Muerto (en curso)
+## Fase 1 — Hombre Muerto (corrida hecha)
 
-- [ ] **Fijar track** con `01_search.py` y refinar el bounding box / punto Fénix contra imagen satelital.
-- [ ] **Correr la cadena** Sentinel-1 → HyP3 → MintPy y publicar el mapa de velocidad + slider.
-- [ ] **Digitalizar piletas** de evaporación → `pipeline/overlay.geojson`.
-- [ ] **Cruce producción ↔ subsidencia**: serie anual de LCE (reportes de la matriz / Secretaría de Minería)
-  contra la evolución del bowl.
+- [x] **Fijar track** (83 descendente) y AOI / punto Fénix.
+- [x] **Correr la cadena** Sentinel-1 → HyP3 → MintPy (136 ifgs, ERA5) → **resultado: baja coherencia sobre el
+  salar** (ver [Resultados](resultados.md)).
+- [x] **Digitalizar piletas** de evaporación → `overlay.geojson` (OSM).
+- [ ] **Capturar la deformación del wellfield** — la prioridad real, dado el resultado:
+    - **Banda L: SAOCOM** (CONAE, argentino, cubre Hombre Muerto) o **ALOS-2** — mantienen coherencia sobre
+      superficies cambiantes mucho mejor que la banda C (en Atacama, la L midió ~2,5 cm).
+    - O reprocesar en **banda C** enfocando el **núcleo de halita** (otro track, umbrales, PSI) — Atacama
+      muestra que se puede.
+- [ ] **Cruce producción ↔ subsidencia** (curva de LCE ya lista) una vez que haya señal coherente sobre los pozos.
 
 ## Fase 2 — Salar opaco (China)
 

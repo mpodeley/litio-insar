@@ -4,8 +4,9 @@
     La corrida sobre Hombre Muerto **no** mostró una cubeta de subsidencia, sino una **limitación de
     coherencia**: el piso húmedo del salar decorrelaciona en banda C y queda sin datos (ver
     [Resultados](resultados.md)). Por eso lo de abajo es el **mecanismo esperado** (la hipótesis), no algo que
-    hayamos confirmado acá. Sigue siendo el marco correcto para cuando se mida con un sensor adecuado
-    (banda X / PSI).
+    hayamos confirmado acá. Sigue siendo el marco correcto para cuando se mida la deformación con coherencia
+    suficiente (banda L tipo SAOCOM/ALOS-2, PSI, o mejor procesamiento del núcleo de halita en banda C, que
+    en Atacama sí funcionó).
 
 ## El mecanismo: bombeo más rápido que la recarga
 

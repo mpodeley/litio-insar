@@ -56,13 +56,14 @@ de Vaca Muerta.
 !!! note "Corrida completa — el cruce queda trunco por la coherencia"
     La cadena InSAR se corrió entera, pero (ver [Resultados](resultados.md)) el piso del salar **decorrelaciona**
     en banda C: no hay datos confiables sobre los pozos/piletas, así que el cruce **producción ↔ subsidencia**
-    no se puede cerrar con Sentinel-1 gratuito. La curva de producción de arriba queda **lista para cruzar**
-    el día que se mida la deformación con banda X (TerraSAR-X/PAZ) o PSI.
+    no se puede cerrar con esta corrida de Sentinel-1. La curva de producción de arriba queda **lista para
+    cruzar** el día que se mida la deformación con coherencia suficiente (banda L tipo SAOCOM/ALOS-2, PSI, o
+    mejor procesamiento del núcleo de halita en banda C).
 
     - [x] Track Sentinel-1 (`01_search.py`) → **83 descendente** fijado en `aoi.py`.
     - [x] Punto Fénix al centroide del polígono OSM "Proyecto Fenix" (`overlay_osm.py`).
     - [x] Overlay de piletas / industria desde OSM → `overlay.geojson` (151 polígonos).
     - [x] Serie anual de producción de litio (preliminar) → `produccion_litio.csv` + gráfico.
     - [x] Correr la cadena InSAR completa (136 interferogramas, ERA5) → **resultado: baja coherencia sobre el salar**.
-    - [ ] Repetir con **banda X / PSI** para capturar la deformación del wellfield.
+    - [ ] Repetir con **banda L (SAOCOM/ALOS-2)** o **PSI** / mejor procesamiento del núcleo, para capturar el wellfield.
     - [ ] Verificar las cifras de producción contra los filings primarios.
