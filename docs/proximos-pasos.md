@@ -1,17 +1,20 @@
 # Próximos pasos
 
-## Fase 1 — Hombre Muerto (corrida hecha)
+## Fase 1 — Hombre Muerto
 
-- [x] **Fijar track** (83 descendente) y AOI / punto Fénix.
-- [x] **Correr la cadena** Sentinel-1 → HyP3 → MintPy (136 ifgs, ERA5) → **resultado: baja coherencia sobre el
-  salar** (ver [Resultados](resultados.md)).
+- [x] **Corregir el track**: el 83 descendente **no cubre el salar** → se usa el **149 ascendente** (ver
+  [Resultados](resultados.md)).
+- [x] **Re-pedir multi-burst** centrado en la operación (402 ifgs, 2014–2026) → MintPy + ERA5:
+  **~85 % de coherencia**, 100 % sobre Fénix.
 - [x] **Digitalizar piletas** de evaporación → `overlay.geojson` (OSM).
-- [ ] **Capturar la deformación del wellfield** — la prioridad real, dado el resultado:
-    - **Banda L: SAOCOM** (CONAE, argentino, cubre Hombre Muerto) o **ALOS-2** — mantienen coherencia sobre
-      superficies cambiantes mucho mejor que la banda C (en Atacama, la L midió ~2,5 cm).
-    - O reprocesar en **banda C** enfocando el **núcleo de halita** (otro track, umbrales, PSI) — Atacama
-      muestra que se puede.
-- [ ] **Cruce producción ↔ subsidencia** (curva de LCE ya lista) una vez que haya señal coherente sobre los pozos.
+- [x] **Extraer la señal acumulada** por zona (~15–30 mm 2014–2026) — emerge tras doble diferencia.
+- [ ] **Bajar el piso de ruido atmosférico** (es el límite actual, no la coherencia):
+    - **GACOS** — corrección troposférica más fina que ERA5 (gratis; pedido y config listos —
+      `salar149_gacos.cfg`).
+    - **Banda L: SAOCOM** (CONAE, argentino) o **NISAR** (NASA, abierto desde 2025) — la palanca de fondo.
+    - Pasos para conseguir cada dato: **[`COMO_PEDIR_DATOS.md`](https://github.com/mpodeley/litio-insar/blob/main/docs/pipeline/COMO_PEDIR_DATOS.md)**.
+- [ ] **Confirmar el signo** (subsidencia vs uplift relativo) y separar subzonas (extracción vs piletas).
+- [ ] **Cruce producción ↔ deformación** (curva de LCE) — completar/verificar la serie de producción.
 
 ## Fase 2 — Salar opaco (China)
 
@@ -24,7 +27,7 @@
 - **Validación de campo**: comparar con **GNSS** o nivelación si hubiera datos públicos en la zona.
 - **Dato hidrogeológico**: niveles **piezométricos** para confirmar la caída del nivel freático (requiere
   datos institucionales, habitualmente no públicos).
-- **Serie más larga**: extender hacia 2017–2018 (inicio de Sentinel-1) para capturar más expansión.
+- **Filtrado de APS**: tras GACOS, evaluar filtrado espacio-temporal del retardo turbulento residual.
 
 ## Spinoff hermano: open-pit por DEM-differencing
 

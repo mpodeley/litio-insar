@@ -6,6 +6,8 @@ __pycache__/
 
 # Productos InSAR y salidas pesadas (no versionar)
 docs/pipeline/products/
+docs/pipeline/products149/
+docs/pipeline/_diagnostico/
 *.h5
 *.tif
 *.tiff

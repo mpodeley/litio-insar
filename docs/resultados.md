@@ -1,65 +1,83 @@
 # Resultados
 
-Dos formas de mirar el mismo dato: el **mapa de velocidad** (cuánto se mueve cada punto por año) y la
-**evolución temporal** (cómo se fue moviendo en el período). Área: **Salar del Hombre Muerto**;
-período **2019–2026**.
+Área: **Salar del Hombre Muerto** (operación Fénix); período **2014–2026**; **Sentinel-1 banda C**,
+track **149 ascendente**, multi-burst (ver [Método](metodo.md)).
 
-!!! danger "Resultado principal: el salar decorrelaciona — el InSAR gratis no ve el piso del salar"
-    Corrimos la cadena completa (track 83 descendente, **136 interferogramas**, 88 fechas, corrección ERA5).
-    El hallazgo no es una cubeta de subsidencia, sino una **limitación de coherencia**: la superficie
-    **húmeda/cambiante del salar (salmuera + piletas activas)** pierde coherencia, así que solo el **16 %**
-    del AOI tiene datos confiables, **concentrados en las lomas/aluvión al SO** — no sobre las piletas ni los
-    pozos. Donde hay datos, el terreno está **esencialmente estable**. **No es un límite físico de la banda C**
-    (en Atacama, Sentinel-1 sí midió la subsidencia sobre el núcleo de halita estable): es dónde **esta corrida
-    gratuita** se queda corta, y por qué (ver abajo y [Método](metodo.md)).
+!!! danger "Primero: por qué la corrida original daba 'nulo' (y por qué estaba mal)"
+    Una primera pasada con el **track 83 descendente** concluía "el salar decorrelaciona, no hay datos sobre
+    los pozos (~16 % de coherencia, sólo en lomas)". **Era un artefacto de cobertura**: el track 83 **no cubre
+    el salar** — su huella corta al sur de Fénix, y lo procesado era terreno al sur. Amplitud y coherencia
+    daban **exactamente cero** sobre la operación porque **no había dato** ahí, no por la sal.
 
-## Velocidad media de deformación (2019–2026)
+    <img src="../assets/cobertura_coherencia.png" alt="cobertura track 83" width="100%">
 
-<iframe src="../assets/demo_subsidencia.html" width="100%" height="520" style="border:1px solid #ccc;border-radius:6px"></iframe>
+    *Track 83: el dato (verde/coherente) cubre sólo al sur de una diagonal recta (borde del frame). El salar y
+    las piletas (contornos rojos) y Fénix (▲) quedan al norte, **sin dato**.*
 
-*Overlay interactivo sobre imagen satelital. Rojo = subsidencia, azul = uplift (mm/año). Zoom y arrastre
-habilitados.*
+## El track correcto (149 ascendente)
 
-## Deformación acumulada en el tiempo (slider)
+Re-pedimos los datos como **multi-burst** centrados en la operación. La huella del track 149 sí contiene el
+salar y Fénix (verificado contra imagen satelital):
 
-<iframe src="../assets/demo_acumulado_slider.html" width="100%" height="560" style="border:1px solid #ccc;border-radius:6px"></iframe>
+<img src="../assets/verif_operacion.png" alt="bursts track 149 sobre la operación" width="100%">
 
-*Arrastrá el slider: cada paso es un trimestre y muestra cuánto se hundió (rojo) o levantó (azul) cada punto
-respecto a la primera fecha. Con suavizado temporal para atenuar el ruido atmosférico.*
+*Los 3 *bursts* IW2 (líneas de colores) y el AOI de análisis (verde) sobre el salar; piletas/concesión OSM
+(blanco/magenta) sobre la sal.*
 
-## Los números
+## El salar SÍ es coherente en banda C
 
-| Métrica | Valor |
-|---|---|
-| Interferogramas / fechas | 136 / 88 (SBAS, track 83 desc.) |
-| Píxeles confiables (coherencia temporal > 0.7) | **92.045 (~16 % del AOI)** |
-| Velocidad **mediana** | **−0.1 mm/año** (estable) |
-| Percentil 1 / 5 | −2.7 / −1.8 mm/año |
-| Percentil 95 / 99 | +1.6 / +2.8 mm/año |
-| Mínimo (más negativo) | −8.0 mm/año (1 píxel aislado) |
+| Métrica | Track 83 (mal ubicado) | **Track 149 (correcto)** |
+|---|---|---|
+| Cobertura del dato sobre el salar | ~0 (fuera del frame) | **completa** |
+| Coherentes (coh. temporal > 0.7) | ~16 % (terreno al sur) | **~85 % del AOI** |
+| Coherencia sobre la concesión de Fénix | 0 % (sin dato) | **100 %** (coh. 0.96) |
+| Interferogramas / fechas | 136 / 88 | **399 / 135** (2014–2026) |
 
-Compará con el piloto hermano de **Vaca Muerta** (estepa árida): ahí la coherencia cubría **~74 %** del área
-y había cubetas de hasta −12 mm/año. Acá la diferencia no es la deformación sino el **terreno**: el salar es
-una superficie cambiante (salmuera, costra, piletas activas) que **rompe la coherencia** en banda C.
+La hipótesis de partida se confirma: **halita árida → alta coherencia**. El problema nunca fue la banda C, era
+el track.
 
-## Por qué pasa esto (y qué haría falta)
+## Velocidad media de deformación (2014–2026)
 
-- **Sentinel-1 es banda C (λ≈5,6 cm)**: muy sensible a cambios de la superficie. Sobre la **halita húmeda y
-  las piletas activas** la fase se decorrelaciona entre pasadas → esos píxeles quedan enmascarados.
-- **Importante (corrección honesta)**: en **Atacama**, la banda C **sí funcionó** — Sentinel-1 detectó ~4 cm
-  de subsidencia LOS sobre el **núcleo de halita seca y estable** (Delgado et al.; el estudio sumó además
-  **ALOS-2 y SAOCOM en banda L** y **PAZ en banda X**). O sea, la banda C **no es** el problema de fondo.
-- Entonces nuestro resultado nulo es **específico de esta corrida/salar**: acá los píxeles coherentes cayeron
-  en los **márgenes**, no en el núcleo. Las palancas reales para mejorarlo: **banda L** (SAOCOM —argentino,
-  cubre el salar— o ALOS-2), que mantiene coherencia sobre superficies cambiantes mucho mejor que la C;
-  procesar enfocando el **núcleo de halita** con otro track / umbrales; y **PSI** sobre estructuras estables.
-- También ayudaría sumar el **track ascendente** (más geometría) y acotar el AOI al wellfield.
+<img src="../assets/vel_smooth.png" alt="velocidad LOS suavizada" width="100%">
 
-## La lección metodológica
+*Velocidad LOS suavizada (mm/año; convención MintPy: + hacia el satélite). El campo es **mayormente ruido
+espacialmente correlacionado** (turbulencia atmosférica de la Puna a 4000 m): no hay una cubeta de subsidencia
+ni un domo limpios a nivel velocidad/píxel. El piso de ruido es ~2 mm/año, del orden de la señal buscada.*
 
-Dos, en realidad: (1) **la atmósfera importa** —la serie larga + corrección **ERA5** evita "ver" subsidencia
-donde solo hay retardo atmosférico—; y (2) **el sensor y la superficie importan tanto como el pipeline**: el
-mismo flujo que funciona de diez en la estepa seca de Vaca Muerta **se queda corto** sobre las partes
-húmedas/cambiantes de este salar. No porque la banda C no sirva (en Atacama sí midió), sino porque acá la
-coherencia no cayó donde está la señal — algo mejorable con **banda L** o mejor procesamiento. Reportar el
-resultado nulo y por qué es parte del experimento.
+## La señal aparece al promediar: subsidencia acumulada vs producción
+
+Promediando por zona y quitando el retardo atmosférico común (doble diferencia vs la mediana de la escena), sí
+emerge una **tendencia coherente** sobre la operación:
+
+<img src="../assets/serie_dd.png" alt="serie acumulada vs producción" width="100%">
+
+*Desplazamiento LOS acumulado por zona (mm), 2014–2026, con la producción de litio (barras). Las tres zonas
+(Fénix, hotspot NE, piletas E) acumulan **~15–30 mm** a lo largo del período, creciendo de forma sostenida
+durante la era de producción.*
+
+| Zona | Acumulado 2014–2026 | Tasa |
+|---|---|---|
+| Hotspot NE (−66.99, −25.37) | ~+25 mm | ~+2,5 mm/año |
+| Piletas E (−66.9) | ~+17 mm | ~+1,3 mm/año |
+| Concesión Fénix | ~+18 mm | ~+1,1 mm/año |
+
+## Los caveats honestos
+
+- **Señal en el piso de ruido**: ~1–2,5 mm/año es del orden del ruido atmosférico por píxel. Sólo se ve limpia
+  **promediando por zona**; tomarla con pinzas hasta bajar el ruido.
+- **Signo sin confirmar**: por convención de MintPy (+ = hacia el satélite) el valor positivo sería **uplift
+  relativo**, no subsidencia; la convención de HyP3 es la opuesta. Hay que verificarlo antes de afirmar
+  dirección (podría ser una mezcla: acumulación de sal en piletas = uplift, + extracción = subsidencia en otra
+  subzona).
+- **Cruce con producción preliminar**: la serie de producción (`produccion_litio.csv`) es escasa y sin
+  verificar; el cruce es ilustrativo, no concluyente.
+
+## Qué falta para una señal limpia
+
+El cuello de botella ahora es **la atmósfera, no la coherencia**. Ver [estado y pendientes](index.md#estado-y-pendientes)
+e [instructivo de pedidos](https://github.com/mpodeley/litio-insar/blob/main/docs/pipeline/COMO_PEDIR_DATOS.md):
+
+1. **GACOS** — corrección troposférica más fina que ERA5 (gratis; pedido listo).
+2. **Banda L (SAOCOM / NISAR)** — más coherencia y unwrapping robusto → mejor estimación del APS. La palanca
+   de fondo (es lo que usó el grupo de Delgado en [Atacama](referencias.md)).
+3. **Track descendente** — para descomponer vertical / este-oeste.

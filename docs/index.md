@@ -24,25 +24,31 @@ oficial no transparenta los caudales.
 
 ## Resultado corto (spoiler)
 
-Corrimos la cadena completa sobre Hombre Muerto y el resultado es **honesto e instructivo**: con
-**Sentinel-1 gratuito (banda C)** el **piso del salar decorrelaciona** (salmuera + halita húmeda + piletas
-activas), así que solo el **~16 %** del AOI —las lomas al SO, no los pozos— tiene datos confiables, y ahí el
-terreno está **estable**. No aparece la cubeta de subsidencia. **No es un fracaso ni un límite de la banda C**
-(en Atacama, Sentinel-1 sí midió ~4 cm sobre el núcleo de halita estable): es que **acá** la coherencia no
-cayó donde está la señal. Contrasta con el éxito del piloto en la estepa seca de Vaca Muerta (~74 % de
-cobertura). Para capturarlo, las palancas son **banda L** (SAOCOM —argentino— o ALOS-2) o mejor procesamiento,
-no necesariamente banda X. Detalle en [Resultados](resultados.md).
+Un giro instructivo, en dos actos:
 
-## Qué se esperaba (y qué falló)
+1. **Primera corrida (resultado nulo) → era un error de cobertura.** Una primera pasada con el **track 83
+   descendente** dio "el salar decorrelaciona, no hay datos sobre los pozos". Resultó **falso**: ese track
+   **no cubre el salar** — su huella (el rectángulo inclinado de la pasada) corta justo al sur de la
+   operación, así que lo que mirábamos era **terreno al sur del salar**, no Fénix. Amplitud y coherencia daban
+   cero ahí simplemente porque **no había dato**, no porque la sal "rompa" la banda C.
+2. **Con el track correcto (149 ascendente) la banda C SÍ ve el salar.** Re-pedimos los datos como
+   **multi-burst** centrado en la operación: **~85 % del AOI coherente** (y **100 % sobre la concesión de
+   Fénix**). Aparece una **señal de deformación acumulada de ~15–30 mm entre 2014 y 2026** sobre la operación,
+   que crece de forma sostenida durante la era de producción.
 
-- **La hipótesis**: zona árida de halita → alta coherencia, y señal de cm/año por bombeo (como
-  [Atacama](referencias.md)).
-- **Lo que pasó**: sobre las partes húmedas/cambiantes (salmuera, piletas activas) la banda C pierde la fase;
-  los píxeles coherentes quedaron en los márgenes, no en el wellfield. La aridez no alcanza si esa parte de la
-  superficie es agua salada cambiante.
-- **Lo que sí quedó útil**: las **piletas de evaporación** (overlay OSM) y la **producción de litio**
-  declarada, listas para cruzar con la deformación cuando se la capture (con banda L tipo SAOCOM/ALOS-2, o
-  mejor procesamiento del núcleo de halita).
+El honesto matiz: esa señal es **chica (~1–2,5 mm/año) y está cerca del piso de ruido atmosférico** de la Puna
+(4000 m), así que sólo emerge limpia al **promediar por zona** y quitar el retardo común. Afinarla (corrección
+**GACOS**, o **banda L** vía SAOCOM/NISAR) es el siguiente paso. Detalle en [Resultados](resultados.md).
+
+## La lección (qué pasó y qué aprendimos)
+
+- **La hipótesis** sigue en pie: zona árida de halita → alta coherencia (¡se confirmó: 85 %!), y señal de
+  mm/año por bombeo (como [Atacama](referencias.md)).
+- **La trampa**: el primer "resultado nulo" no era física sino **el track equivocado**. Lección dura de InSAR:
+  antes de interpretar coherencia, **verificar que la huella del dato cubra el objetivo** (lo chequeamos
+  contra imagen satelital).
+- **Lo que tenemos ahora**: serie 2014–2026 con buena coherencia sobre el salar, lista para cruzar con la
+  **producción de litio** una vez bajado el ruido atmosférico (ver [estado y pendientes](#estado-y-pendientes)).
 
 ## Qué vas a encontrar acá
 
@@ -59,8 +65,23 @@ no necesariamente banda X. Detalle en [Resultados](resultados.md).
     de la deformación. Se usó **Claude (Anthropic)** para asistir en el procesamiento, el análisis y la
     redacción; los resultados y conclusiones fueron revisados por el autor.
 
-!!! note "Estado: corrida completa, resultado tipo 'límite del método'"
+## Estado y pendientes
+
+!!! note "Estado actual (jun-2026): el salar SÍ se mide; afinando la señal"
     El sitio nace como **spinoff** del proyecto [Subsidencia en Vaca Muerta con
-    InSAR](https://mpodeley.github.io/vaca-muerta-insar/). La cadena Sentinel-1 → HyP3 → MintPy se corrió
-    completa (136 interferogramas, ERA5); el resultado es la **limitación de coherencia** descrita arriba, no
-    una cubeta de subsidencia. El [caso opaco en China](salar-opaco.md) queda como trabajo futuro.
+    InSAR](https://mpodeley.github.io/vaca-muerta-insar/).
+
+    **Hecho:**
+
+    - [x] Detectado y corregido el error de track (83 desc. no cubría el salar → **149 asc.**).
+    - [x] Re-pedido **multi-burst** a HyP3 centrado en la operación (402 interferogramas, 2014–2026, banda C).
+    - [x] Serie SBAS + ERA5 corrida: **~85 % de coherencia** sobre el salar, 100 % sobre Fénix.
+    - [x] Señal de deformación acumulada (~15–30 mm, 2014–2026) extraída por zona.
+
+    **Pendiente:**
+
+    - [ ] **Corrección atmosférica GACOS** para bajar el piso de ruido de la Puna (pedido listo).
+    - [ ] **Banda L (SAOCOM / NISAR)** — la palanca de fondo para una señal limpia sobre la sal.
+    - [ ] Confirmar el **signo** (subsidencia vs uplift relativo) y separar subzonas (extracción vs piletas).
+    - [ ] Completar/verificar la serie de **producción de litio** y hacer el cruce final.
+    - [ ] [Caso opaco en China](salar-opaco.md) (trabajo futuro).

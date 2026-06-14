@@ -53,17 +53,17 @@ de Vaca Muerta.
 
 ## Estado del análisis
 
-!!! note "Corrida completa — el cruce queda trunco por la coherencia"
-    La cadena InSAR se corrió entera, pero (ver [Resultados](resultados.md)) el piso del salar **decorrelaciona**
-    en banda C: no hay datos confiables sobre los pozos/piletas, así que el cruce **producción ↔ subsidencia**
-    no se puede cerrar con esta corrida de Sentinel-1. La curva de producción de arriba queda **lista para
-    cruzar** el día que se mida la deformación con coherencia suficiente (banda L tipo SAOCOM/ALOS-2, PSI, o
-    mejor procesamiento del núcleo de halita en banda C).
+!!! note "Estado: el salar se mide; afinando la señal antes del cruce"
+    Con el **track correcto (149 ascendente)** el salar **sí es coherente** en banda C (~85 %, ver
+    [Resultados](resultados.md)) — el "resultado nulo" inicial era el track 83, que no cubría el salar. Hay una
+    señal de deformación acumulada (~15–30 mm, 2014–2026), pero **chica y cerca del piso de ruido atmosférico**,
+    así que el cruce **producción ↔ deformación** se hará firme tras bajar ese ruido (GACOS / banda L).
 
-    - [x] Track Sentinel-1 (`01_search.py`) → **83 descendente** fijado en `aoi.py`.
+    - [x] **Track 149 ascendente** (multi-burst) — el que realmente cubre el salar + Fénix.
     - [x] Punto Fénix al centroide del polígono OSM "Proyecto Fenix" (`overlay_osm.py`).
-    - [x] Overlay de piletas / industria desde OSM → `overlay.geojson` (151 polígonos).
+    - [x] Overlay de piletas / industria desde OSM → `overlay.geojson`.
     - [x] Serie anual de producción de litio (preliminar) → `produccion_litio.csv` + gráfico.
-    - [x] Correr la cadena InSAR completa (136 interferogramas, ERA5) → **resultado: baja coherencia sobre el salar**.
-    - [ ] Repetir con **banda L (SAOCOM/ALOS-2)** o **PSI** / mejor procesamiento del núcleo, para capturar el wellfield.
+    - [x] Cadena InSAR completa (399 interferogramas, 2014–2026, ERA5) → **~85 % de coherencia**.
+    - [ ] **GACOS** y/o **banda L (SAOCOM/NISAR)** para una señal limpia ([cómo pedir los datos](https://github.com/mpodeley/litio-insar/blob/main/docs/pipeline/COMO_PEDIR_DATOS.md)).
+    - [ ] Confirmar el signo; cruce producción ↔ deformación.
     - [ ] Verificar las cifras de producción contra los filings primarios.

@@ -5,19 +5,22 @@ más rápido que la recarga y el terreno se compacta (mismo mecanismo validado p
 InSAR en el Salar de Atacama, Chile). Zona árida de halita → alta coherencia
 interferométrica, caso favorable para Sentinel-1/SBAS.
 
-NOTA: el bounding box y el punto de referencia son APROXIMADOS (centrados en el
-salar y las piletas de evaporación de Fénix / Minera del Altiplano). Refinar tras
-correr 01_search.py y mirar la imagen satelital. El track/frame queda en None
-hasta elegirlo con 01_search.py (la búsqueda usa solo el polígono).
+NOTA: el AOI está ACOTADO a la subcuenca OCCIDENTAL del salar — la que opera Fénix
+(wellfield + piletas al sur + lomas estables al SO que sirven de referencia). La
+caja ancha previa (lon −67.15…−66.55) quedaba descentrada: su centro caía sobre la
+playa abierta y la subcuenca oriental (lado Sal de Vida), dejando la operación de
+Fénix pegada al borde oeste y casi todos los píxeles fuera del objetivo. El bombeo
+ocurre cerca del centro de la subcuenca occidental (0–40 m) y las piletas ~13 km al
+sur del centro de la playa. El track/frame se fijó con 01_search.py.
 """
 
 from __future__ import annotations
 
-# --- Bounding box (lon/lat) cubriendo el salar y las piletas de evaporación ---
-WEST = -67.15
-SOUTH = -25.65
-EAST = -66.55
-NORTH = -25.05
+# --- Bounding box (lon/lat) acotado a la subcuenca occidental de Fénix ---
+WEST = -67.20
+SOUTH = -25.55
+EAST = -66.95
+NORTH = -25.30
 
 # --- Referencia (lat, lon): centroide del polígono "Proyecto Fenix" de OSM (overlay_osm.py) ---
 FENIX = (-25.49, -67.10)
