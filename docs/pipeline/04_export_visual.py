@@ -56,6 +56,13 @@ def _save_gdal(h5: Path, dset: str, out: Path) -> None:
     subprocess.run(["save_gdal.py", str(h5), "-d", dset, "-o", str(out)], check=True)
 
 
+def _utm_epsg():
+    """EPSG UTM del centro del AOI (save_gdal.py a veces pierde el CRS de MintPy)."""
+    lon, lat = aoi.center_lonlat()
+    zone = int((lon + 180) / 6) + 1
+    return f"EPSG:{(32700 if lat < 0 else 32600) + zone}"
+
+
 def export_geotiff() -> None:
     """Exporta velocidad enmascarada (UTM mm/año) y una versión WGS84 para el mapa."""
     import rasterio
@@ -71,6 +78,10 @@ def export_geotiff() -> None:
     with rasterio.open(_MASK) as msk:
         keep = msk.read(1) > 0
     v[~keep] = np.nan
+
+    # save_gdal.py a veces deja el CRS vacío → asignar el UTM del AOI para reproyectar bien.
+    if not profile.get("crs"):
+        profile["crs"] = rasterio.crs.CRS.from_string(_utm_epsg())
 
     # GeoTIFF entregable (UTM, con NaN como nodata)
     profile.update(dtype="float32", count=1, nodata=np.nan)

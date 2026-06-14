@@ -3,3 +3,25 @@ site/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Productos InSAR y salidas pesadas (no versionar)
+docs/pipeline/products/
+*.h5
+*.tif
+*.tiff
+*.zip
+*.log
+*.grb
+*.kmz
+
+# Subproductos generados por MintPy / el pipeline
+docs/pipeline/ERA5/
+docs/pipeline/pic/
+docs/pipeline/inputs/
+docs/pipeline/smallbaselineApp.cfg
+docs/pipeline/*.txt
+docs/pipeline/velocity_mm_yr.tif
+
+# Outputs del pipeline (las copias en docs/assets/ sí se versionan)
+docs/pipeline/*.png
+docs/pipeline/demo_*.html

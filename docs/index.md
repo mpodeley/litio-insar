@@ -22,12 +22,24 @@ oficial no transparenta los caudales.
     una caída de ~10 m del nivel freático por un bombeo más rápido que la recarga. El mecanismo es el mismo
     que esperamos en Hombre Muerto. Ver [Referencias](referencias.md).
 
-## Por qué los salares son un buen caso para InSAR
+## Resultado corto (spoiler)
 
-- **Zona árida, suelo de halita, sin vegetación** → alta **coherencia** interferométrica (poco ruido).
-- **Señal localizada y de magnitud cm/año** → bien dentro de lo que mide Sentinel-1.
-- **Huella muy visible**: las **piletas de evaporación** son enormes y se digitalizan fácil desde imágenes
-  ópticas, lo que da un overlay para cruzar con el bowl de subsidencia.
+Corrimos la cadena completa sobre Hombre Muerto y el resultado es **honesto e instructivo**: con
+**Sentinel-1 gratuito (banda C)** el **piso del salar decorrelaciona** (salmuera + halita húmeda + piletas
+activas), así que solo el **~16 %** del AOI —las lomas al SO, no los pozos— tiene datos confiables, y ahí el
+terreno está **estable**. No aparece la cubeta de subsidencia. **No es un fracaso**: es el **límite físico**
+del método para salares húmedos, y contrasta con el éxito del piloto en la estepa seca de Vaca Muerta
+(~74 % de cobertura). Capturar el bowl probablemente exija **banda X** (TerraSAR-X/PAZ, como en Atacama) o
+**PSI**. Detalle en [Resultados](resultados.md).
+
+## Qué se esperaba (y qué falló)
+
+- **La hipótesis**: zona árida de halita → alta coherencia, y señal de cm/año por bombeo (como
+  [Atacama](referencias.md)).
+- **Lo que pasó**: la halita **húmeda** y las piletas activas cambian entre pasadas → la banda C pierde la
+  fase. La aridez no alcanza si la superficie es agua salada cambiante.
+- **Lo que sí quedó útil**: las **piletas de evaporación** (overlay OSM) y la **producción de litio**
+  declarada, listas para cruzar con cualquier deformación que un sensor de banda X sí pueda medir.
 
 ## Qué vas a encontrar acá
 
@@ -44,8 +56,8 @@ oficial no transparenta los caudales.
     de la deformación. Se usó **Claude (Anthropic)** para asistir en el procesamiento, el análisis y la
     redacción; los resultados y conclusiones fueron revisados por el autor.
 
-!!! warning "Estado: experimento en curso"
+!!! note "Estado: corrida completa, resultado tipo 'límite del método'"
     El sitio nace como **spinoff** del proyecto [Subsidencia en Vaca Muerta con
-    InSAR](https://mpodeley.github.io/vaca-muerta-insar/). El método y el pipeline están listos; los
-    **resultados sobre Hombre Muerto se completan** al correr la cadena Sentinel-1 → HyP3 → MintPy
-    (ver [Método](metodo.md)).
+    InSAR](https://mpodeley.github.io/vaca-muerta-insar/). La cadena Sentinel-1 → HyP3 → MintPy se corrió
+    completa (136 interferogramas, ERA5); el resultado es la **limitación de coherencia** descrita arriba, no
+    una cubeta de subsidencia. El [caso opaco en China](salar-opaco.md) queda como trabajo futuro.

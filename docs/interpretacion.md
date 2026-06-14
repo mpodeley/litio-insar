@@ -1,5 +1,12 @@
 # Interpretación
 
+!!! danger "Lo primero: qué se pudo y qué no medir"
+    La corrida sobre Hombre Muerto **no** mostró una cubeta de subsidencia, sino una **limitación de
+    coherencia**: el piso húmedo del salar decorrelaciona en banda C y queda sin datos (ver
+    [Resultados](resultados.md)). Por eso lo de abajo es el **mecanismo esperado** (la hipótesis), no algo que
+    hayamos confirmado acá. Sigue siendo el marco correcto para cuando se mida con un sensor adecuado
+    (banda X / PSI).
+
 ## El mecanismo: bombeo más rápido que la recarga
 
 La extracción de litio por salmuera **bombea agua salada desde el acuífero del salar** hacia las piletas de

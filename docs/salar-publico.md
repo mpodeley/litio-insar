@@ -53,13 +53,16 @@ de Vaca Muerta.
 
 ## Estado del análisis
 
-!!! warning "Pendiente de la primera corrida"
-    Falta correr la cadena InSAR sobre el AOI (ver [Método](metodo.md)) y completar:
+!!! note "Corrida completa — el cruce queda trunco por la coherencia"
+    La cadena InSAR se corrió entera, pero (ver [Resultados](resultados.md)) el piso del salar **decorrelaciona**
+    en banda C: no hay datos confiables sobre los pozos/piletas, así que el cruce **producción ↔ subsidencia**
+    no se puede cerrar con Sentinel-1 gratuito. La curva de producción de arriba queda **lista para cruzar**
+    el día que se mida la deformación con banda X (TerraSAR-X/PAZ) o PSI.
 
-    - [x] Elegir el track Sentinel-1 con `01_search.py` y fijarlo en `aoi.py` (**track 83 descendente**).
-    - [x] Punto de referencia Fénix fijado al centroide del polígono OSM "Proyecto Fenix" (`overlay_osm.py`).
-    - [x] Overlay de piletas / industria desde OpenStreetMap → `pipeline/overlay.geojson` (151 polígonos).
+    - [x] Track Sentinel-1 (`01_search.py`) → **83 descendente** fijado en `aoi.py`.
+    - [x] Punto Fénix al centroide del polígono OSM "Proyecto Fenix" (`overlay_osm.py`).
+    - [x] Overlay de piletas / industria desde OSM → `overlay.geojson` (151 polígonos).
     - [x] Serie anual de producción de litio (preliminar) → `produccion_litio.csv` + gráfico.
-    - [ ] Refinar el bounding box contra la imagen satelital (verificación fina).
-    - [ ] Generar el mapa de velocidad y el slider ([Resultados](resultados.md)) — requiere los productos InSAR.
+    - [x] Correr la cadena InSAR completa (136 interferogramas, ERA5) → **resultado: baja coherencia sobre el salar**.
+    - [ ] Repetir con **banda X / PSI** para capturar la deformación del wellfield.
     - [ ] Verificar las cifras de producción contra los filings primarios.

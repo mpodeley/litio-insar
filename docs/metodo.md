@@ -58,9 +58,11 @@ Con los productos descargados, **MintPy** invierte la red SBAS a una serie de ti
 
 ## 4. Máscara de calidad
 
-Se conservan solo los pixels con **coherencia temporal alta** (> 0.7). En un salar árido se espera una
-cobertura muy buena; las propias piletas con agua/salmuera (que cambian) quedan enmascaradas, lo cual está
-bien: la señal de compactación está en el **terreno alrededor** de los pozos.
+Se conservan solo los pixels con **coherencia temporal alta** (> 0.7). **Resultado real**: a diferencia de la
+estepa seca de Vaca Muerta (~74 % de cobertura), acá la coherencia cubre solo **~16 %** del AOI — el piso
+**húmedo** del salar y las piletas activas decorrelacionan en banda C y quedan enmascarados. La señal de
+compactación, si la hay, está justamente sobre el wellfield, que es lo que se pierde (ver
+[Resultados](resultados.md)).
 
 ## 5. Visualización
 

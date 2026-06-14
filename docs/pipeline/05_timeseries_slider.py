@@ -137,7 +137,14 @@ def main() -> None:
     src_transform = rasterio.transform.Affine(
         float(a["X_STEP"]), 0, float(a["X_FIRST"]),
         0, float(a["Y_STEP"]), float(a["Y_FIRST"]))
-    src_crs = rasterio.crs.CRS.from_epsg(int(a["EPSG"]))
+    # El EPSG del h5 a veces es inválido (9122) → caer al UTM del centro del AOI.
+    try:
+        src_crs = rasterio.crs.CRS.from_epsg(int(a["EPSG"]))
+        src_crs.to_wkt()  # fuerza validación
+    except Exception:  # noqa: BLE001
+        lon, lat = aoi.center_lonlat()
+        zone = int((lon + 180) / 6) + 1
+        src_crs = rasterio.crs.CRS.from_epsg((32700 if lat < 0 else 32600) + zone)
 
     vmax = float(np.nanpercentile(np.abs(stack[np.isfinite(stack)]), 98)) or 10.0
     norm = colors.TwoSlopeNorm(vmin=-vmax, vcenter=0.0, vmax=vmax)
